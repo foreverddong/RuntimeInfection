@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		BD7A28801B40F06700B970E4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7A287F1B40F06700B970E4 /* main.m */; };
+		BD7A28881B40F1B700B970E4 /* myObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7A28871B40F1B700B970E4 /* myObject.m */; };
+		BDA8DD491B4133E40012A328 /* RIInjection.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA8DD481B4133E40012A328 /* RIInjection.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +27,10 @@
 /* Begin PBXFileReference section */
 		BD7A287C1B40F06700B970E4 /* RuntimeInfection */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = RuntimeInfection; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD7A287F1B40F06700B970E4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BD7A28861B40F1B700B970E4 /* myObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myObject.h; sourceTree = SOURCE_ROOT; };
+		BD7A28871B40F1B700B970E4 /* myObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myObject.m; sourceTree = SOURCE_ROOT; };
+		BDA8DD471B4133E40012A328 /* RIInjection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RIInjection.h; sourceTree = "<group>"; };
+		BDA8DD481B4133E40012A328 /* RIInjection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RIInjection.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +64,10 @@
 			isa = PBXGroup;
 			children = (
 				BD7A287F1B40F06700B970E4 /* main.m */,
+				BD7A28861B40F1B700B970E4 /* myObject.h */,
+				BD7A28871B40F1B700B970E4 /* myObject.m */,
+				BDA8DD471B4133E40012A328 /* RIInjection.h */,
+				BDA8DD481B4133E40012A328 /* RIInjection.m */,
 			);
 			path = RuntimeInfection;
 			sourceTree = "<group>";
@@ -118,6 +128,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD7A28881B40F1B700B970E4 /* myObject.m in Sources */,
+				BDA8DD491B4133E40012A328 /* RIInjection.m in Sources */,
 				BD7A28801B40F06700B970E4 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -202,6 +214,8 @@
 		BD7A28841B40F06700B970E4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -209,6 +223,8 @@
 		BD7A28851B40F06700B970E4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -232,6 +248,7 @@
 				BD7A28851B40F06700B970E4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

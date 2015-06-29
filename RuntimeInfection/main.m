@@ -7,11 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <objc/runtime.h>
+#import <objc/message.h>
+#import "myObject.h"
+#import "RIInjection.h"
 int main(int argc, const char * argv[]) {
-    @autoreleasepool {
-        // insert code here...
-        NSLog(@"Hello, World!");
-    }
+
+    myObject *testObject = [[myObject alloc] init];
+    myObject *targetObject = [[myObject alloc] init];
+        RIInjection *testInjection = [[RIInjection alloc] init];
+    [testInjection setInjectionHostWithString:@"myObject"];
+    [testInjection hijackMethod:@selector(testFunction2withString:) WithObject:targetObject selector:@selector(replacedFunction:) overrideArgumentType:NO];
+    [testObject testFunction2withString:@"meow"];
+
+
     return 0;
 }
+
