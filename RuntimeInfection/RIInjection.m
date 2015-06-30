@@ -10,10 +10,54 @@
 #import <objc/runtime.h>
 #import <objc/message.h>
 @implementation RIInjection
+#pragma mark initialization
+-(id)init
+{
+    self = [super init];
+    [self commonInit];
+    if (self) {
+        return self;
+    }
+    return nil;
+}
+
+-(id)initWithInjectionHostClass:(Class)hostClass
+{
+    self = [super init];
+    [self commonInit];
+    injectionHost = hostClass;
+    if (self) {
+        return self;
+    }
+    return nil;
+}
+
+-(id)initWithInjectionHostClassName:(NSString*)hostClassName
+{
+    self = [super init];
+    [self commonInit];
+    injectionHost = NSClassFromString(hostClassName);
+    if (self) {
+        return self;
+    }
+    return nil;
+}
+
+-(void)commonInit
+{
+    flag = NO;
+    alreadyManipulatedException = [[NSException alloc] initWithName:@"alreadyManipulatedException" reason:@"Manipultaion has already performed." userInfo:nil];
+}
+
 
 #pragma mark Method Hijack
+
 -(IMP)hijackMethod:(SEL)targetSelector WithObject:(id)anObject selector:(SEL)aSelector overrideArgumentType:(BOOL)isOverriding
 {
+    if (flag == YES) {
+        [alreadyManipulatedException raise];
+        return nil;
+    }
     originalMethodSelector = targetSelector;
     IMP originalMethod = class_getMethodImplementation(injectionHost, targetSelector);
     originalMethodIMP = originalMethod;
@@ -24,18 +68,20 @@
     else {
         class_replaceMethod(injectionHost, targetSelector, newMethodIMP, method_getTypeEncoding(class_getInstanceMethod(object_getClass(anObject), aSelector)));
     }
+    flag = YES;
     return newMethodIMP;
 }
 -(IMP)restoreMethod
 {
-    class_replaceMethod(injectionHost, originalMethodSelector, originalMethodIMP, originalMethodEncoding);
-    return originalMethodIMP;
+    if (flag == YES) {
+        class_replaceMethod(injectionHost, originalMethodSelector, originalMethodIMP, originalMethodEncoding);
+        flag = NO;
+        return originalMethodIMP;
+    }
+    else {
+        return nil;
+    }
 }
--(id)injectionMethodObj
-{
-    return nil;
-}
-
 
 #pragma mark Special Setters
 -(void)setInjectionHostWithString:(NSString*)string

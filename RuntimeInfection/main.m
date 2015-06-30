@@ -18,6 +18,7 @@ int main(int argc, const char * argv[]) {
         RIInjection *testInjection = [[RIInjection alloc] init];
     [testInjection setInjectionHostWithString:@"myObject"];
     [testInjection hijackMethod:@selector(testFunction2withString:) WithObject:targetObject selector:@selector(replacedFunction:) overrideArgumentType:NO];
+    [testInjection hijackMethod:@selector(testFunction2withString:) WithObject:targetObject selector:@selector(replacedFunction:) overrideArgumentType:NO];
     [testObject testFunction2withString:@"meow"];
 
 

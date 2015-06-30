@@ -24,17 +24,24 @@
 */
 @interface RIInjection : NSObject{
     
-    Class injectionHost;                //the host class binding to
-    IMP originalMethodIMP;              //used to store the original method address in order to restore
-    SEL originalMethodSelector;         //original selector, in order to restore
-    char *originalMethodEncoding;       //original encoding, in order to restore
+    Class           injectionHost;                  //the host class binding to
+    IMP             originalMethodIMP;              //used to store the original method address in order to restore
+    SEL             originalMethodSelector;         //original selector, in order to restore
+    char*           originalMethodEncoding;         //original encoding, in order to restore
+    BOOL            flag;                           //mark for restore
+    NSException*    alreadyManipulatedException;    //make sure the manipulation can only be performed once
 }
+
+#pragma mark initialization
+-(id)initWithInjectionHostClass:(Class)hostClass;
+-(id)initWithInjectionHostClassName:(NSString*)hostClassName;
+
 
 #pragma mark Method Hijack
 -(IMP)hijackMethod:(SEL)targetSelector WithObject:(id)anObject selector:(SEL)aSelector overrideArgumentType:(BOOL)isOverriding;
                                                         //hijack the target method, returns the hijacked method IMP
-
 -(IMP)restoreMethod; //restore the target method, returns the original IMP;
+
 
 #pragma mark Special Setters
 -(void)setInjectionHostWithString:(NSString*)string;
