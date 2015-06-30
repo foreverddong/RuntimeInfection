@@ -14,11 +14,14 @@
 int main(int argc, const char * argv[]) {
 
     myObject *testObject = [[myObject alloc] init];
+    
     myObject *targetObject = [[myObject alloc] init];
-        RIInjection *testInjection = [[RIInjection alloc] init];
-    [testInjection setInjectionHostWithString:@"myObject"];
+        RIInjection *testInjection = [[RIInjection alloc] initWithInjectionHostClassName:@"myObject"];
+    //[testInjection setInjectionHostWithString:@"myObject"];
     [testInjection hijackMethod:@selector(testFunction2withString:) WithObject:targetObject selector:@selector(replacedFunction:) overrideArgumentType:NO];
+    [testInjection restoreMethod];
     [testInjection hijackMethod:@selector(testFunction2withString:) WithObject:targetObject selector:@selector(replacedFunction:) overrideArgumentType:NO];
+    
     [testObject testFunction2withString:@"meow"];
 
 

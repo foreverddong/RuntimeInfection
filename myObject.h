@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 @import ObjectiveC.NSObject;
-@interface myObject : NSObject
-{
+@interface myObject : NSObject {
+    
     NSString *testString;
+    
 }
 -(void)testFunction1;
 -(NSString*)testFunction2withString:(NSString*)string;
